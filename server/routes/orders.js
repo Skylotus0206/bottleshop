@@ -2,7 +2,7 @@
 import express from 'express';
 const router = express.Router();
 
-import postOrder from '../controller/orderController.js';
+import postOrder from '../controller/postOrder.js';
 
 // http://localhost:8080/order
 router.get('/', async (req, res) => {

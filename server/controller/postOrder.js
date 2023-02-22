@@ -6,22 +6,23 @@ const postOrder = async (req, res, next) => {
   try {
     const orderInfo = await Order.create({
       user_id,
+      guest_id,
       product_id,
       w_count,
       c_count,
     });
 
+    console.log(orderInfo);
+
     // populate product_id
-    await Order.findOne({ product_id: product_id })
+    const result = await Order.findOne({ _id: orderInfo._id })
       .populate('product_id', 'type price')
       .exec();
 
-    orderInfo.save();
-
     console.log('saved in database');
-    res.send('success');
-  } catch (e) {
-    console.log(e.message);
+    res.send(result);
+  } catch (err) {
+    console.log(err.message);
   }
 };
 

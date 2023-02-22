@@ -2,7 +2,7 @@
 import express from 'express';
 const router = express.Router();
 
-import postShipment from '../controller/shipmentController.js';
+import postShipment from '../controller/postShipment.js';
 
 // http://localhost:8080/shipment
 router.get('/', (req, res) => {

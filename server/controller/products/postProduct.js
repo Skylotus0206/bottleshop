@@ -1,5 +1,5 @@
 'use strict';
-import { Product } from '../models/index.js';
+import { Product } from '../../models/index.js';
 
 const postProduct = async (req, res, next) => {
   try {
@@ -26,9 +26,9 @@ const postProduct = async (req, res, next) => {
     });
     productInfo.save();
     console.log('saved in database');
-    res.send('success');
-  } catch (e) {
-    console.log(e.message);
+    res.send('success /products');
+  } catch (err) {
+    console.log(err.message);
   }
 };
 
