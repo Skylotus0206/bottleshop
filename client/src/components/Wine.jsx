@@ -3,8 +3,8 @@ import "./Wine.css";
 import Card from "react-bootstrap/Card";
 import winemain from "./images/winebenner.png";
 import Pagination from "./Pagination";
-import LOUISLATOURSANTENAY from "./images/redwine/LOUIS LATOUR SANTENAY.png";
-import GALANTAS from "./images/redwine/GALANTAS.png";
+import LOUISLATOURSANTENAY from "./images/red wine/LOUIS LATOUR SANTENAY.png";
+import GALANTAS from "./images/red wine/GALANTAS.png";
 
 const Wine = () => {
   return (
