@@ -54,12 +54,12 @@ const Admin = () => {
   return (
     <>
       {/* 네비게이션 바 */}
-      <Nav id="nav_bar" variant="tabs" defaultActiveKey="/admin/user">
+      <Nav id="nav_bar" variant="tabs" defaultActiveKey="/admin/users">
         <Nav.Item>
-          <Nav.Link href="/admin/product">Product</Nav.Link>
+          <Nav.Link href="/admin/products">Product</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link href="/admin/user">User</Nav.Link>
+          <Nav.Link href="/admin/users">User</Nav.Link>
         </Nav.Item>
       </Nav>
 
