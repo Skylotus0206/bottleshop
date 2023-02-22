@@ -1,0 +1,75 @@
+:root {
+  --main-color: #6c49b8;
+  --text-color: #566270;
+  --sub-color: #e0e3da;
+  margin: 0;
+}
+
+@font-face {
+  font-family: "AlexBrush";
+  src: url("../../fonts/AlexBrush-Regular.ttf");
+}
+@font-face {
+  font-family: "DXPnM";
+  src: url("../../fonts/DXPnM-KSCpc-EUC-H.ttf");
+}
+#nav_bar {
+  --bs-nav-link-color: var(--main-color);
+  --bs-nav-tabs-link-active-color: var(--sub-color);
+  --bs-nav-tabs-link-active-bg: var(--main-color);
+  --bs-nav-link-hover-color: var(--main-color);
+}
+
+h2 {
+  color: var(--main-color);
+  font-size: 40px;
+  font-weight: bold;
+  margin: 0 2%;
+}
+
+.product_bar {
+  margin: 2% 5%;
+  border-bottom: 2px solid var(--main-color);
+  display: flex;
+}
+
+#product_manager {
+  justify-content: flex-end;
+  margin: 15px 2% 0 0;
+}
+
+#product_searchbar {
+  max-width: 20%;
+}
+
+#button {
+  color: var(--main-color);
+  background-color: var(--sub-color);
+  border-color: var(--text-color);
+}
+
+#button:hover {
+  color: var(--sub-color);
+  background-color: var(--main-color);
+  border-color: var(--text-color);
+}
+
+.product_DB {
+  margin: 50px 10%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 30px;
+}
+
+#product_list {
+  margin: 0 30%;
+}
+
+#page {
+  margin: 20px 0;
+  justify-content: center;
+  --bs-pagination-active-color: var(--sub-color);
+  --bs-pagination-active-bg: var(--main-color);
+  --bs-pagination-active-border-color: var(--main-color);
+  --bs-pagination-color: var(--main-color);
+}
