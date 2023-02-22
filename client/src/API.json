@@ -1,3 +1,5 @@
 {
-  "product": "http://localhost:8080/product"
+  "product": "http://localhost:8080/products",
+  "product_delete": "http://localhost:8080/products/delete/",
+  "product_put": "http://localhost:8080/products/edit/"
 }

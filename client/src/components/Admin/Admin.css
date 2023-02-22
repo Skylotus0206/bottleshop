@@ -60,9 +60,13 @@ h2 {
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 30px;
 }
+.product_DB > .mb-1 {
+  font-size: 20px;
+  font-weight: bold;
+}
 
 #product_list {
-  margin: 0 30%;
+  margin: 0 20%;
 }
 
 #page {
