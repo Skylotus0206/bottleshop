@@ -1,5 +1,5 @@
 'use strict';
-import { User } from '../models/index.js';
+import { User } from '../../models/index.js';
 
 const getUser = async (req, res, next) => {
   const {
