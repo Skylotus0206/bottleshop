@@ -1,7 +1,7 @@
 'use strict';
-import { User } from '../models/index.js';
+import { User } from '../../models/index.js';
 
-const deleteUser = function (id, callback) {
+const deleteFunc = function (id, callback) {
     User.deleteOne({ userId : id }, (err, user) => {
         if(err) {
             callback(err, null);
@@ -13,10 +13,10 @@ const deleteUser = function (id, callback) {
 
 
 // [input] userId
-const dropUser = (req, res) => {
+const deleteUser = (req, res) => {
     const id = req.body.userId;
     console.log('회원탈퇴할 ID : ' + id);
-    deleteUser(id, (err, user) => {
+    deleteFunc(id, (err, user) => {
         if(err) {
             console.log('회원 탈퇴 도중 에러 발생');
             //response.redirect('/modify');
@@ -32,6 +32,6 @@ const dropUser = (req, res) => {
     })
 };
 
-export default dropUser;
+export default deleteUser;
 
     

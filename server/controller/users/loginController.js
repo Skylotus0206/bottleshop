@@ -1,5 +1,5 @@
 'use strict';
-import { User } from '../models/index.js';
+import { User } from '../../models/index.js';
 
 const getLogin = async (req, res, next) => {
     const { userId, password } = req.body;
