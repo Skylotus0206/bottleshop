@@ -1,8 +1,8 @@
 'use strict';
 import { Schema } from 'mongoose';
 
-const ShipmentSchema = new Schema({
-  _id: Schema.Types.ObjectId,
+const ShipmentSchema = new Schema(
+{
   order_id: {
     type: String,
     ref: 'Order',

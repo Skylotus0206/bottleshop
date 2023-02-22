@@ -31,4 +31,4 @@ const postProduct = async (req, res, next) => {
   }
 };
 
-export { postProduct };
+export default postProduct;

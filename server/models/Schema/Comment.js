@@ -1,8 +1,9 @@
 'use strict';
 import { Schema } from 'mongoose';
 
-const CommentSchema = new Schema({
-    _id: Schema.Types.ObjectId,
+const CommentSchema = new Schema(
+{
+    isAdmin: false,
     user_id: {
         type: Schema.Types.ObjectId,
         required: true,
@@ -16,6 +17,7 @@ const CommentSchema = new Schema({
         type: String,
         default: '관리자',
     },
+    date: Date,
 },
 {
       timestamps: true,
