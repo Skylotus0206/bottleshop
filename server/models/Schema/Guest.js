@@ -1,8 +1,8 @@
 'use strict';
 import { Schema } from 'mongoose';
 
-const GuestSchema = new Schema({
-    _id: Schema.Types.ObjectId,
+const GuestSchema = new Schema(
+{
     order_id: {
         type: String,
         required: true,
