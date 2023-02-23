@@ -1,10 +1,10 @@
 import React from "react";
 import "./App.css";
-import Layout from "./components/Layout";
+import Layout from "./components/Categories/Layout";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Categories from "./components/Categories";
-import Wine from "./components/Wine";
-import Cheeses from "./components/Cheeses";
+import Categories from "./components/Categories/Categories";
+import WineList from "./components/Categories/Winelist";
+import Cheeses from "./components/Categories/Cheeses";
 import Admin_product from "./components/Admin/Admin_product";
 import Admin_user from "./components/Admin/Admin_user";
 
@@ -20,7 +20,7 @@ export default function App() {
               element={<Navigate replace to="/categories" />}
             ></Route>
             <Route exact path="/categories" element={<Categories />}></Route>
-            <Route exact path="/categories/wine" element={<Wine />}></Route>
+            <Route exact path="/categories/wine" element={<WineList />}></Route>
             <Route
               exact
               path="/categories/cheeses"

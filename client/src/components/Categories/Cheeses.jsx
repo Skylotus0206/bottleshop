@@ -1,6 +1,6 @@
 import React from "react";
 import "./Cheeses.css";
-import Cheesesmain from "./images/cheesebenner.png";
+import Cheesesmain from "../images/cheesebenner.png";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 

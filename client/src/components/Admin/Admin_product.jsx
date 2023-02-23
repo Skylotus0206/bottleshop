@@ -13,27 +13,28 @@ import axios from "axios";
 const api = require("../../API.json");
 
 const Admin = () => {
-  const [todoList, setTodoList] = useState(null);
+  // get 데이터 불러오기
+  const [dataList, setDataList] = useState(null);
 
   const fetchData = async () => {
     const response = await axios.get(api.product);
-    setTodoList(response.data);
+    setDataList(response.data);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  const onSubmitHandler = async (e) => {
-    e.preventDefault();
-    const name = e.target.name.value;
-    const type = e.target.type.value;
-    const price = e.target.price.value;
-    const description = e.target.description.value;
-    const wine_type = e.target.wine_type.value;
-    const origin = e.target.origin.value;
-    const abv = e.target.abv.value;
-    const image_path = e.target.image_path.value;
+  const onSubmitHandler = async (element) => {
+    element.preventDefault();
+    const name = element.target.name.value;
+    const type = element.target.type.value;
+    const price = element.target.price.value;
+    const description = element.target.description.value;
+    const wine_type = element.target.wine_type.value;
+    const origin = element.target.origin.value;
+    const abv = element.target.abv.value;
+    const image_path = element.target.image_path.value;
 
     await axios.post(api.product, {
       name,
@@ -64,10 +65,10 @@ const Admin = () => {
   // 리스트 구현
   let list = [];
   {
-    todoList?.map((todo, num) =>
+    dataList?.map((data, num) =>
       list.push(
         <ListGroup.Item key={num} action onClick={popup}>
-          {todo.name}
+          {data.name}
         </ListGroup.Item>
       )
     );

@@ -7,52 +7,47 @@
   height: 100%;
   text-align: center;
 }
-body {
-  background-color: #6c49b8;
-}
 
 @font-face {
   font-family: "AlexBrush";
-  src: url("../fonts/AlexBrush-Regular.ttf");
+  src: url("../../fonts/AlexBrush-Regular.ttf");
 }
 @font-face {
   font-family: "DXPnM";
-  src: url("../fonts/DXPnM-KSCpc-EUC-H.ttf");
+  src: url("../../fonts/DXPnM-KSCpc-EUC-H.ttf");
 }
 
-.wine_img {
+.cheese_img {
   margin: 30px 0;
-  height: 800px;
-  object-fit: fill;
+  width: 100%;
+  object-fit: cover;
   overflow: hidden;
 }
 
-.wine_text {
+.cheeses_text {
   color: var(--main-color);
   padding: 50px 0;
   font-family: "DXPnM";
   font-size: 5rem;
 }
 
-.best_wine {
+.best_cheeses {
   font-family: "DXPnM";
   font-size: 1.5rem;
   display: flex;
   justify-content: space-evenly;
+  padding: 50px 0;
 }
 
-.wine_list1,
-.wine_list2,
-.wine_list3 {
+.cheeses_list1,
+.cheeses_list2,
+.cheeses_list3,
+.cheeses_list4,
+.cheeses_list5 {
   display: flex;
   justify-content: space-evenly;
 
-  padding: 50px;
+  padding: 100px;
   font-family: "DXPnM";
   font-size: 1.5rem;
-}
-
-.page_go {
-  display: flex;
-  justify-content: center;
 }

@@ -3,17 +3,17 @@ import "./Categories.css";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Carousel from "react-bootstrap/Carousel";
-import main from "./images/main.png";
-import wine from "./images/wine.png";
-import cheeses from "./images/cheeses.png";
-import Red1 from "./images/red1.png";
-import White2 from "./images/white2.png";
-import Champ1 from "./images/champ1.png";
-import Cheeses1 from "./images/Parmesan.png";
-import Cheeses2 from "./images/Ricotta1.png";
-import Main_about1 from "./images/main_about_01.png";
-import Main_about2 from "./images/main_about_02.png";
-import Main_about3 from "./images/main_about_03.png";
+import main from "../images/main.png";
+import wine from "../images/wine.png";
+import cheeses from "../images/cheeses.png";
+import Red1 from "../images/red1.png";
+import White2 from "../images/white2.png";
+import Champ1 from "../images/champ1.png";
+import Cheeses1 from "../images/Parmesan.png";
+import Cheeses2 from "../images/Ricotta1.png";
+import Main_about1 from "../images/main_about_01.png";
+import Main_about2 from "../images/main_about_02.png";
+import Main_about3 from "../images/main_about_03.png";
 
 const Categories = () => {
   return (
