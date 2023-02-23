@@ -115,6 +115,7 @@ const Admin = () => {
     const abv = form[6].lastChild.value;
     const image_path = form[7].lastChild.value;
 
+    // 이름 중복 방지
     let overlap = false;
     for (let data of dataList) {
       if (data.name === name) {
@@ -147,7 +148,7 @@ const Admin = () => {
     }
   };
 
-  // 페이지 수
+  // 페이지 넘버 만들기
   const dataList_length = dataList?.length;
   const page_number =
     dataList_length % 5 === 0
@@ -232,79 +233,78 @@ const Admin = () => {
       </Nav>
 
       {/* Product 페이지 */}
-      <form>
-        {/* 상단바 */}
-        <div class="product_bar">
-          <h2>Product</h2>
-          <InputGroup id="product_manager" size="sm" className="mb-2">
-            <Form.Control id="product_searchbar" placeholder="ID" />
-            <Button id="button" onClick={search}>
-              조회
-            </Button>
-            <Button id="button" onClick={db_put}>
-              저장
-            </Button>
-            <Button id="button" onClick={db_delete}>
-              삭제
-            </Button>
-            <Button id="button" onClick={db_post}>
-              추가
-            </Button>
-          </InputGroup>
-        </div>
 
-        {/* DB입력 부분 */}
-        <div class="product_DB">
-          <Form.Group className="mb-1">
-            <Form.Label>Name</Form.Label>
-            <Form.Control type="text" placeholder="String" />
-          </Form.Group>
+      {/* 상단바 */}
+      <div class="product_bar">
+        <h2>Product</h2>
+        <InputGroup id="product_manager" size="sm" className="mb-2">
+          <Form.Control id="product_searchbar" placeholder="ID" />
+          <Button id="button" onClick={search}>
+            조회
+          </Button>
+          <Button id="button" onClick={db_put}>
+            저장
+          </Button>
+          <Button id="button" onClick={db_delete}>
+            삭제
+          </Button>
+          <Button id="button" onClick={db_post}>
+            추가
+          </Button>
+        </InputGroup>
+      </div>
 
-          <Form.Group className="mb-1">
-            <Form.Label>Type</Form.Label>
-            <Form.Select>
-              <option></option>
-              <option value="Wine">Wine</option>
-              <option value="Cheese">Cheese</option>
-            </Form.Select>
-          </Form.Group>
+      {/* DB입력 부분 */}
+      <div class="product_DB">
+        <Form.Group className="mb-1">
+          <Form.Label>Name</Form.Label>
+          <Form.Control type="text" placeholder="String" />
+        </Form.Group>
 
-          <Form.Group className="mb-1">
-            <Form.Label>Price</Form.Label>
-            <Form.Control type="text" placeholder="Number" />
-          </Form.Group>
+        <Form.Group className="mb-1">
+          <Form.Label>Type</Form.Label>
+          <Form.Select>
+            <option></option>
+            <option value="Wine">Wine</option>
+            <option value="Cheese">Cheese</option>
+          </Form.Select>
+        </Form.Group>
 
-          <Form.Group className="mb-1">
-            <Form.Label>Description</Form.Label>
-            <Form.Control type="text" placeholder="String" />
-          </Form.Group>
+        <Form.Group className="mb-1">
+          <Form.Label>Price</Form.Label>
+          <Form.Control type="text" placeholder="Number" />
+        </Form.Group>
 
-          <Form.Group className="mb-1">
-            <Form.Label>Wine_type</Form.Label>
-            <Form.Select>
-              <option></option>
-              <option value="Red_Wine">Red</option>
-              <option value="White_Wine">White</option>
-              <option value="Sparkling">Sparkling</option>
-            </Form.Select>
-          </Form.Group>
+        <Form.Group className="mb-1">
+          <Form.Label>Description</Form.Label>
+          <Form.Control type="text" placeholder="String" />
+        </Form.Group>
 
-          <Form.Group className="mb-1">
-            <Form.Label>Origin</Form.Label>
-            <Form.Control type="text" placeholder="String" />
-          </Form.Group>
+        <Form.Group className="mb-1">
+          <Form.Label>Wine_type</Form.Label>
+          <Form.Select>
+            <option></option>
+            <option value="Red_Wine">Red</option>
+            <option value="White_Wine">White</option>
+            <option value="Sparkling">Sparkling</option>
+          </Form.Select>
+        </Form.Group>
 
-          <Form.Group className="mb-1">
-            <Form.Label>Abv</Form.Label>
-            <Form.Control type="text" placeholder="Number" />
-          </Form.Group>
+        <Form.Group className="mb-1">
+          <Form.Label>Origin</Form.Label>
+          <Form.Control type="text" placeholder="String" />
+        </Form.Group>
 
-          <Form.Group className="mb-1">
-            <Form.Label>Image_path</Form.Label>
-            <Form.Control type="text" placeholder="String" />
-          </Form.Group>
-        </div>
-      </form>
+        <Form.Group className="mb-1">
+          <Form.Label>Abv</Form.Label>
+          <Form.Control type="text" placeholder="Number" />
+        </Form.Group>
+
+        <Form.Group className="mb-1">
+          <Form.Label>Image_path</Form.Label>
+          <Form.Control type="text" placeholder="String" />
+        </Form.Group>
+      </div>
 
       {/* 리스트 */}
       <div id="product_list">

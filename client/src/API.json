@@ -1,5 +1,9 @@
 {
-  "product": "http://localhost:8080/products",
-  "product_delete": "http://localhost:8080/products/delete/",
-  "product_put": "http://localhost:8080/products/edit/"
+  "products": "http://localhost:8080/products",
+  "products_delete": "http://localhost:8080/products/delete/",
+  "products_put": "http://localhost:8080/products/edit/",
+  "users": "http://localhost:8080/users",
+  "users_join": "http://localhost:8080/users/join",
+  "users_delete": "http://localhost:8080/users/delete/",
+  "users_edit": "http://localhost:8080/users/edit/"
 }
