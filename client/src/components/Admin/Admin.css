@@ -27,18 +27,18 @@ h2 {
   margin: 0 2%;
 }
 
-.product_bar {
+.DB_bar {
   margin: 2% 5%;
   border-bottom: 2px solid var(--main-color);
   display: flex;
 }
 
-#product_manager {
+#DB_manager {
   justify-content: flex-end;
   margin: 15px 2% 0 0;
 }
 
-#product_searchbar {
+#DB_searchbar {
   max-width: 20%;
 }
 
@@ -54,18 +54,18 @@ h2 {
   border-color: var(--text-color);
 }
 
-.product_DB {
+.DB_data {
   margin: 50px 10%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 30px;
 }
-.product_DB > .mb-1 {
+.DB_data > .mb-1 {
   font-size: 20px;
   font-weight: bold;
 }
 
-#product_list {
+#DB_list {
   margin: 0 20%;
 }
 

@@ -5,8 +5,8 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Categories from "./components/Categories";
 import Wine from "./components/Wine";
 import Cheeses from "./components/Cheeses";
-import Admin_products from "./components/Admin/Admin_product";
-import Admin_users from "./components/Admin/Admin_user";
+import Admin_products from "./components/Admin/Admin_products";
+import Admin_users from "./components/Admin/Admin_users";
 
 export default function App() {
   return (

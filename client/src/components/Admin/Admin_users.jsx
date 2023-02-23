@@ -15,10 +15,11 @@ const api = require("../../API.json");
 
 const Admin = () => {
   // [GET] 데이터 불러오기
+
   const [dataList, setDataList] = useState(null);
 
   const fetchData = async () => {
-    const response = await axios.get(api.product);
+    const response = await axios.get(api.users);
     setDataList(response.data);
   };
 
@@ -28,8 +29,8 @@ const Admin = () => {
 
   // 입력칸 리셋
   const reset = () => {
-    const form = document.querySelectorAll(".product_DB > .mb-1");
-    document.querySelector("#product_searchbar").value = "";
+    const form = document.querySelectorAll(".DB_data > .mb-1");
+    document.querySelector("#DB_searchbar").value = "";
     form[0].lastChild.value = "";
     form[1].lastChild.value = "";
     form[2].lastChild.value = "";
@@ -42,20 +43,19 @@ const Admin = () => {
 
   // [POST] 데이터 전송하기
   const db_post = async () => {
-    const form = document.querySelectorAll(".product_DB > .mb-1");
-    const name = form[0].lastChild.value;
-    const type = form[1].lastChild.value;
-    const price = form[2].lastChild.value;
-    const description = form[3].lastChild.value;
-    const wine_type = form[4].lastChild.value;
-    const origin = form[5].lastChild.value;
-    const abv = form[6].lastChild.value;
-    const image_path = form[7].lastChild.value;
+    const form = document.querySelectorAll(".DB_data > .mb-1");
+    const userId = form[0].lastChild.value;
+    const domain = form[1].lastChild.value;
+    const password = form[2].lastChild.value;
+    const name = form[3].lastChild.value;
+    const phone = form[4].lastChild.value;
+    const birthday = form[5].lastChild.value;
+    const auth_email = form[6].lastChild.value;
 
     // 이름 중복 방지
     let overlap = false;
     for (let data of dataList) {
-      if (data.name === name) {
+      if (data.userId === userId) {
         alert("이름이 중복됩니다");
         overlap = true;
       }
@@ -63,15 +63,14 @@ const Admin = () => {
     if (!overlap) {
       let success = false;
       await axios
-        .post(api.product, {
+        .post(api.users_join, {
+          userId,
+          domain,
+          password,
           name,
-          type,
-          price,
-          description,
-          wine_type,
-          origin,
-          abv,
-          image_path,
+          phone,
+          birthday,
+          auth_email,
         })
         .then((response) => {
           if (response.status === 200) {
@@ -87,38 +86,35 @@ const Admin = () => {
 
   // [DELETE] ID로 선택된 데이터 삭제
   const db_delete = async () => {
-    const searchbar_value = document.querySelector("#product_searchbar").value;
+    const searchbar_value = document.querySelector("#DB_searchbar").value;
     let success = false;
-    await axios
-      .delete(api.product_delete + searchbar_value)
-      .then((response) => {
-        if (response.status === 200) {
-          alert("삭제되었습니다.");
-          fetchData(); // 리스트 새로고침
-          reset(); // 입력칸 리셋
-          success = true;
-        }
-      });
+    await axios.delete(api.users_delete + searchbar_value).then((response) => {
+      if (response.status === 200) {
+        alert("삭제되었습니다.");
+        fetchData(); // 리스트 새로고침
+        reset(); // 입력칸 리셋
+        success = true;
+      }
+    });
     if (!success) alert("ID를 바르게 입력해 주세요");
   };
 
   // [PUT] ID로 선택된 데이터 수정
   const db_put = async () => {
-    const form = document.querySelectorAll(".product_DB > .mb-1");
-    const searchbar_value = document.querySelector("#product_searchbar").value;
-    const name = form[0].lastChild.value;
-    const type = form[1].lastChild.value;
-    const price = form[2].lastChild.value;
-    const description = form[3].lastChild.value;
-    const wine_type = form[4].lastChild.value;
-    const origin = form[5].lastChild.value;
-    const abv = form[6].lastChild.value;
-    const image_path = form[7].lastChild.value;
+    const form = document.querySelectorAll(".DB_data > .mb-1");
+    const searchbar_value = document.querySelector("#DB_searchbar").value;
+    const userId = form[0].lastChild.value;
+    const domain = form[1].lastChild.value;
+    const password = form[2].lastChild.value;
+    const name = form[3].lastChild.value;
+    const phone = form[4].lastChild.value;
+    const birthday = form[5].lastChild.value;
+    const auth_email = form[6].lastChild.value;
 
     // 이름 중복 방지
     let overlap = false;
     for (let data of dataList) {
-      if (data.name === name) {
+      if (data.userId === userId) {
         alert("이름이 중복됩니다");
         overlap = true;
       }
@@ -126,15 +122,14 @@ const Admin = () => {
     if (!overlap) {
       let success = false;
       await axios
-        .put(api.product_put + searchbar_value, {
+        .put(api.users_edit + searchbar_value, {
+          userId,
+          domain,
+          password,
           name,
-          type,
-          price,
-          description,
-          wine_type,
-          origin,
-          abv,
-          image_path,
+          phone,
+          birthday,
+          auth_email,
         })
         .then((response) => {
           if (response.status === 200) {
@@ -174,16 +169,16 @@ const Admin = () => {
 
   // 데이터를 입력하면 입력폼에 표시하는 코드
   const show = (data) => {
-    const form = document.querySelectorAll(".product_DB > .mb-1");
-    const searchbar = document.querySelector("#product_searchbar");
+    const form = document.querySelectorAll(".DB_data > .mb-1");
+    const searchbar = document.querySelector("#DB_searchbar");
     searchbar.value = data._id;
-    form[0].lastChild.value = data.name;
-    form[1].lastChild.value = data.type;
-    form[2].lastChild.value = data.price;
-    form[3].lastChild.value = data.description;
-    form[4].lastChild.value = data.wine_type;
-    form[5].lastChild.value = data.origin;
-    form[6].lastChild.value = data.abv;
+    form[0].lastChild.value = data.userId;
+    form[1].lastChild.value = data.domain;
+    form[2].lastChild.value = data.password;
+    form[3].lastChild.value = data.name;
+    form[4].lastChild.value = data.phone;
+    form[5].lastChild.value = data.birthday;
+    form[6].lastChild.value = data.auth_email;
     form[7].lastChild.value = data.image_path;
   };
 
@@ -199,7 +194,7 @@ const Admin = () => {
           }}
         >
           <td>{data._id}</td>
-          <td>{data.name}</td>
+          <td>{data.userId}</td>
         </tr>
       );
     }
@@ -207,7 +202,7 @@ const Admin = () => {
 
   // 조회 기능
   const search = () => {
-    const searchbar_value = document.querySelector("#product_searchbar").value;
+    const searchbar_value = document.querySelector("#DB_searchbar").value;
 
     let success = false;
     for (let data of dataList) {
@@ -223,22 +218,22 @@ const Admin = () => {
   return (
     <>
       {/* 네비게이션 바 */}
-      <Nav id="nav_bar" variant="tabs" defaultActiveKey="/admin/products">
+      <Nav id="nav_bar" variant="tabs" defaultActiveKey="/admin/users">
         <Nav.Item>
-          <Nav.Link href="/admin/products">Product</Nav.Link>
+          <Nav.Link href="/admin/products">Products</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link href="/admin/users">User</Nav.Link>
+          <Nav.Link href="/admin/users">Users</Nav.Link>
         </Nav.Item>
       </Nav>
 
-      {/* Product 페이지 */}
+      {/* users 페이지 */}
 
       {/* 상단바 */}
-      <div class="product_bar">
-        <h2>Product</h2>
-        <InputGroup id="product_manager" size="sm" className="mb-2">
-          <Form.Control id="product_searchbar" placeholder="ID" />
+      <div class="DB_bar">
+        <h2>Users</h2>
+        <InputGroup id="DB_manager" size="sm" className="mb-2">
+          <Form.Control id="DB_searchbar" placeholder="ID" />
           <Button id="button" onClick={search}>
             조회
           </Button>
@@ -255,58 +250,54 @@ const Admin = () => {
       </div>
 
       {/* DB입력 부분 */}
-      <div class="product_DB">
+      <div class="DB_data">
         <Form.Group className="mb-1">
-          <Form.Label>User_Id</Form.Label>
-          <Form.Control name="userId" type="text" placeholder="String" />
+          <Form.Label>Users_Id</Form.Label>
+          <Form.Control type="text" placeholder="String" />
         </Form.Group>
 
-        <Form.Group className="mb-1" controlId="form_Type">
+        <Form.Group className="mb-1">
           <Form.Label>Domain</Form.Label>
-          <Form.Select name="domain">
+          <Form.Select>
             <option></option>
             <option value="naver.com">Wine</option>
             <option value="gmail.com">Cheese</option>
           </Form.Select>
         </Form.Group>
 
-        <Form.Group className="mb-1" controlId="form_Price">
+        <Form.Group className="mb-1">
           <Form.Label>Password</Form.Label>
-          <Form.Control name="password" type="text" placeholder="String" />
+          <Form.Control type="text" placeholder="String" />
         </Form.Group>
 
-        <Form.Group className="mb-1" controlId="form_Description">
-          <Form.Label>Name</Form.Label>
-          <Form.Control name="name" type="text" placeholder="String" />
+        <Form.Group className="mb-1">
+          <Form.Label>UserId</Form.Label>
+          <Form.Control type="text" placeholder="String" />
         </Form.Group>
 
-        <Form.Group className="mb-1" controlId="form_Wine_type">
+        <Form.Group className="mb-1">
           <Form.Label>Phone</Form.Label>
-          <Form.Control name="phone" type="phone" placeholder="Number" />
+          <Form.Control type="phone" placeholder="Number" />
         </Form.Group>
 
-        <Form.Group className="mb-1" controlId="form_Origin">
+        <Form.Group className="mb-1">
           <Form.Label>Birthday</Form.Label>
-          <Form.Control name="birthday" type="date" />
+          <Form.Control type="date" />
         </Form.Group>
 
-        <Form.Group className="mb-1" controlId="form_Abv">
+        <Form.Group className="mb-1">
           <Form.Label>Auth_email</Form.Label>
-          <Form.Control
-            name="auth_email"
-            type="boolean"
-            placeholder="Boolean"
-          />
+          <Form.Control type="boolean" placeholder="Boolean" />
         </Form.Group>
       </div>
 
       {/* 리스트 */}
-      <div id="product_list">
+      <div id="DB_list">
         <Table striped bordered hover>
           <thead>
             <tr>
               <th>ID</th>
-              <th>Name</th>
+              <th>User_Id</th>
             </tr>
           </thead>
           <tbody>{list}</tbody>

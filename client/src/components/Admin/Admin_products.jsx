@@ -18,7 +18,7 @@ const Admin = () => {
   const [dataList, setDataList] = useState(null);
 
   const fetchData = async () => {
-    const response = await axios.get(api.product);
+    const response = await axios.get(api.products);
     setDataList(response.data);
   };
 
@@ -28,8 +28,8 @@ const Admin = () => {
 
   // 입력칸 리셋
   const reset = () => {
-    const form = document.querySelectorAll(".product_DB > .mb-1");
-    document.querySelector("#product_searchbar").value = "";
+    const form = document.querySelectorAll(".DB_data > .mb-1");
+    document.querySelector("#DB_searchbar").value = "";
     form[0].lastChild.value = "";
     form[1].lastChild.value = "";
     form[2].lastChild.value = "";
@@ -42,7 +42,7 @@ const Admin = () => {
 
   // [POST] 데이터 전송하기
   const db_post = async () => {
-    const form = document.querySelectorAll(".product_DB > .mb-1");
+    const form = document.querySelectorAll(".DB_data > .mb-1");
     const name = form[0].lastChild.value;
     const type = form[1].lastChild.value;
     const price = form[2].lastChild.value;
@@ -63,7 +63,7 @@ const Admin = () => {
     if (!overlap) {
       let success = false;
       await axios
-        .post(api.product, {
+        .post(api.products, {
           name,
           type,
           price,
@@ -87,10 +87,10 @@ const Admin = () => {
 
   // [DELETE] ID로 선택된 데이터 삭제
   const db_delete = async () => {
-    const searchbar_value = document.querySelector("#product_searchbar").value;
+    const searchbar_value = document.querySelector("#DB_searchbar").value;
     let success = false;
     await axios
-      .delete(api.product_delete + searchbar_value)
+      .delete(api.products_delete + searchbar_value)
       .then((response) => {
         if (response.status === 200) {
           alert("삭제되었습니다.");
@@ -105,7 +105,7 @@ const Admin = () => {
   // [PUT] ID로 선택된 데이터 수정
   const db_put = async () => {
     const form = document.querySelectorAll(".product_DB > .mb-1");
-    const searchbar_value = document.querySelector("#product_searchbar").value;
+    const searchbar_value = document.querySelector("#DB_searchbar").value;
     const name = form[0].lastChild.value;
     const type = form[1].lastChild.value;
     const price = form[2].lastChild.value;
@@ -126,7 +126,7 @@ const Admin = () => {
     if (!overlap) {
       let success = false;
       await axios
-        .put(api.product_put + searchbar_value, {
+        .put(api.products_put + searchbar_value, {
           name,
           type,
           price,
@@ -174,8 +174,8 @@ const Admin = () => {
 
   // 데이터를 입력하면 입력폼에 표시하는 코드
   const show = (data) => {
-    const form = document.querySelectorAll(".product_DB > .mb-1");
-    const searchbar = document.querySelector("#product_searchbar");
+    const form = document.querySelectorAll(".DB_data > .mb-1");
+    const searchbar = document.querySelector("#DB_searchbar");
     searchbar.value = data._id;
     form[0].lastChild.value = data.name;
     form[1].lastChild.value = data.type;
@@ -207,7 +207,7 @@ const Admin = () => {
 
   // 조회 기능
   const search = () => {
-    const searchbar_value = document.querySelector("#product_searchbar").value;
+    const searchbar_value = document.querySelector("#DB_searchbar").value;
 
     let success = false;
     for (let data of dataList) {
@@ -225,20 +225,20 @@ const Admin = () => {
       {/* 네비게이션 바 */}
       <Nav id="nav_bar" variant="tabs" defaultActiveKey="/admin/products">
         <Nav.Item>
-          <Nav.Link href="/admin/products">Product</Nav.Link>
+          <Nav.Link href="/admin/products">Products</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link href="/admin/users">User</Nav.Link>
+          <Nav.Link href="/admin/users">Users</Nav.Link>
         </Nav.Item>
       </Nav>
 
-      {/* Product 페이지 */}
+      {/* products 페이지 */}
 
       {/* 상단바 */}
-      <div class="product_bar">
-        <h2>Product</h2>
-        <InputGroup id="product_manager" size="sm" className="mb-2">
-          <Form.Control id="product_searchbar" placeholder="ID" />
+      <div class="DB_bar">
+        <h2>Products</h2>
+        <InputGroup id="DB_manager" size="sm" className="mb-2">
+          <Form.Control id="DB_searchbar" placeholder="ID" />
           <Button id="button" onClick={search}>
             조회
           </Button>
@@ -255,7 +255,7 @@ const Admin = () => {
       </div>
 
       {/* DB입력 부분 */}
-      <div class="product_DB">
+      <div class="DB_data">
         <Form.Group className="mb-1">
           <Form.Label>Name</Form.Label>
           <Form.Control type="text" placeholder="String" />
@@ -307,7 +307,7 @@ const Admin = () => {
       </div>
 
       {/* 리스트 */}
-      <div id="product_list">
+      <div id="DB_list">
         <Table striped bordered hover>
           <thead>
             <tr>
