@@ -2,7 +2,6 @@
 import express from 'express';
 import auth from '../middleware/auth.js';
 import { User } from '../models/index.js';
-
 const router = express.Router();
 import postUser from '../controller/users/postUser.js';
 import loginUser from '../controller/users/loginUser.js';
