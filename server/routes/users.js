@@ -1,37 +1,40 @@
-'use strict';
-import express from 'express';
-import auth from '../middleware/auth.js';
-import { User } from '../models/index.js';
+"use strict";
+import express from "express";
+import auth from "../middleware/auth.js";
+import { User } from "../models/index.js";
 
 const router = express.Router();
-import getUser from '../controller/users/userController.js';
-import getLogin from '../controller/users/loginController.js';
-import deleteUser from '../controller/users/deleteController.js';
+import getUser from "../controller/users/userController.js";
+import getLogin from "../controller/users/loginController.js";
+import deleteUser from "../controller/users/deleteController.js";
 
 // http://localhost:8080/users : 전체 회원 조회
-router.get('/', auth, async (req, res) => {
-  if(req.user.isAdmin == true){
-    const users = await User.find({});
-    res.json(users);  
-  }
-  else {
-    res.render('users');
-  }
+router.get("/", async (req, res) => {
+  const users = await User.find({});
+  res.json(users);
+
+  // if(req.user.isAdmin == true){
+  //   const users = await User.find({});
+  //   res.json(users);
+  // }
+  // else {
+  //   res.render('users');
+  // }
 });
 
-router.get('/join', (req, res, next) => {
-    res.render('join');
+router.get("/join", (req, res, next) => {
+  res.render("join");
 });
 
 router.get("/login", (req, res) => {
-    res.render('login');
+  res.render("login");
 });
 
 // http://localhost:8080/users/join
-router.post('/join', getUser);
+router.post("/join", getUser);
 
 // http://localhost:8080/users/login
-router.post('/login', getLogin);
+router.post("/login", getLogin);
 
 // http://localhost:8080/users/auth
 router.get("/auth", auth, (req, res) => {
@@ -58,6 +61,6 @@ router.get("/logout", auth, (req, res) => {
 });
 
 // http://localhost:8080/users/delete
-router.post('/delete', deleteUser);
+router.post("/delete", deleteUser);
 
 export default router;

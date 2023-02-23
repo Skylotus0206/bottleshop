@@ -10,16 +10,21 @@ import {
   Pagination,
 } from "react-bootstrap";
 
-// API 불러오기
-const api = require("../../API.json");
+// json 연결
+const api = require("../../API.json"); // API 불러오기
+const admin_list = require("./Admin_list.json"); // Admin 리스트 불러오기
+const domain_list = require("../../Domain_list.json"); // Category 리스트 불러오기
 
 const Admin = () => {
+  fetch(api.users)
+    .then((response) => response.json())
+    .then((data) => console.log(data));
   // [GET] 데이터 불러오기
 
   const [dataList, setDataList] = useState(null);
 
   const fetchData = async () => {
-    const response = await axios.get(api.users);
+    const response = await axios.get(api.users_GET);
     setDataList(response.data);
   };
 
@@ -38,7 +43,6 @@ const Admin = () => {
     form[4].lastChild.value = "";
     form[5].lastChild.value = "";
     form[6].lastChild.value = "";
-    form[7].lastChild.value = "";
   };
 
   // [POST] 데이터 전송하기
@@ -60,10 +64,11 @@ const Admin = () => {
         overlap = true;
       }
     }
+
     if (!overlap) {
       let success = false;
       await axios
-        .post(api.users_join, {
+        .post(api.users_POST, {
           userId,
           domain,
           password,
@@ -88,7 +93,7 @@ const Admin = () => {
   const db_delete = async () => {
     const searchbar_value = document.querySelector("#DB_searchbar").value;
     let success = false;
-    await axios.delete(api.users_delete + searchbar_value).then((response) => {
+    await axios.delete(api.users_DELETE + searchbar_value).then((response) => {
       if (response.status === 200) {
         alert("삭제되었습니다.");
         fetchData(); // 리스트 새로고침
@@ -114,15 +119,20 @@ const Admin = () => {
     // 이름 중복 방지
     let overlap = false;
     for (let data of dataList) {
-      if (data.userId === userId) {
-        alert("이름이 중복됩니다");
-        overlap = true;
+      if (data._id != searchbar_value) {
+        // 수정전 이름과 다를경우
+        if (data.name === name) {
+          // 중복체크
+          alert("이름이 중복됩니다");
+          overlap = true;
+        }
       }
     }
+
     if (!overlap) {
       let success = false;
       await axios
-        .put(api.users_edit + searchbar_value, {
+        .put(api.users_PUT + searchbar_value, {
           userId,
           domain,
           password,
@@ -142,6 +152,22 @@ const Admin = () => {
       if (!success) alert("ID와 값을 바르게 입력해 주세요");
     }
   };
+
+  // Domain List 만들기
+  const domain_form_list = [];
+  domain_list.forEach((data) => {
+    domain_form_list.push(<option value={data.name}>{data.name}</option>);
+  });
+
+  // NAV바 만들기
+  const nav_list = [];
+  admin_list.forEach((data) => {
+    nav_list.push(
+      <Nav.Item>
+        <Nav.Link href={data.href}>{data.name}</Nav.Link>
+      </Nav.Item>
+    );
+  });
 
   // 페이지 넘버 만들기
   const dataList_length = dataList?.length;
@@ -183,10 +209,10 @@ const Admin = () => {
   };
 
   // 리스트 구현
-  let list = [];
+  let db_list = [];
   dataList?.forEach((data, index) => {
     if (5 * (active - 1) <= index && index < 5 * active) {
-      list.push(
+      db_list.push(
         <tr
           key={index}
           onClick={() => {
@@ -218,13 +244,8 @@ const Admin = () => {
   return (
     <>
       {/* 네비게이션 바 */}
-      <Nav id="nav_bar" variant="tabs" defaultActiveKey="/admin/users">
-        <Nav.Item>
-          <Nav.Link href="/admin/products">Products</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="/admin/users">Users</Nav.Link>
-        </Nav.Item>
+      <Nav id="nav_bar" variant="tabs" defaultActiveKey={"/admin/users"}>
+        {nav_list}
       </Nav>
 
       {/* users 페이지 */}
@@ -260,8 +281,7 @@ const Admin = () => {
           <Form.Label>Domain</Form.Label>
           <Form.Select>
             <option></option>
-            <option value="naver.com">Wine</option>
-            <option value="gmail.com">Cheese</option>
+            {domain_form_list}
           </Form.Select>
         </Form.Group>
 
@@ -300,7 +320,7 @@ const Admin = () => {
               <th>User_Id</th>
             </tr>
           </thead>
-          <tbody>{list}</tbody>
+          <tbody>{db_list}</tbody>
         </Table>
         <Pagination id="page" size="sm">
           {items}

@@ -1,9 +1,17 @@
 {
-  "products": "http://localhost:8080/products",
-  "products_delete": "http://localhost:8080/products/delete/",
-  "products_put": "http://localhost:8080/products/edit/",
-  "users": "http://localhost:8080/users",
-  "users_join": "http://localhost:8080/users/join",
-  "users_delete": "http://localhost:8080/users/delete/",
-  "users_edit": "http://localhost:8080/users/edit/"
+  "products_GET": "http://localhost:8080/products",
+  "products_POST": "http://localhost:8080/products",
+  "products_DELETE": "http://localhost:8080/products/delete/",
+  "products_PUT": "http://localhost:8080/products/edit/",
+  "users_GET": "http://localhost:8080/users",
+  "users_POST": "http://localhost:8080/users/join",
+  "users_DELETE": "http://localhost:8080/users/delete/",
+  "users_PUT": "http://localhost:8080/users/edit/",
+  "orders_GET": "http://localhost:8080/orders",
+  "orders_POST": "http://localhost:8080/orders",
+  "orders_DELETE": "http://localhost:8080/orders/delete/",
+  "orders_PUT": "http://localhost:8080/orders/edit/",
+  "users_login_POST": "http://localhost:8080/users/login",
+  "users_auth_GET": "http://localhost:8080/users/auth",
+  "users_logout_GET": "http://localhost:8080/users/logout"
 }

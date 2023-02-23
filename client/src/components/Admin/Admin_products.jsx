@@ -10,15 +10,17 @@ import {
   Pagination,
 } from "react-bootstrap";
 
-// API 불러오기
-const api = require("../../API.json");
+// JSON 가져오기
+const api = require("../../API.json"); // API 불러오기
+const admin_list = require("./Admin_list.json"); // Admin 리스트 불러오기
+const category_list = require("../../Category_list.json"); // Category 리스트 불러오기
 
 const Admin = () => {
   // [GET] 데이터 불러오기
   const [dataList, setDataList] = useState(null);
 
   const fetchData = async () => {
-    const response = await axios.get(api.products);
+    const response = await axios.get(api.products_GET);
     setDataList(response.data);
   };
 
@@ -63,7 +65,7 @@ const Admin = () => {
     if (!overlap) {
       let success = false;
       await axios
-        .post(api.products, {
+        .post(api.products_POST, {
           name,
           type,
           price,
@@ -90,7 +92,7 @@ const Admin = () => {
     const searchbar_value = document.querySelector("#DB_searchbar").value;
     let success = false;
     await axios
-      .delete(api.products_delete + searchbar_value)
+      .delete(api.products_DELETE + searchbar_value)
       .then((response) => {
         if (response.status === 200) {
           alert("삭제되었습니다.");
@@ -104,7 +106,7 @@ const Admin = () => {
 
   // [PUT] ID로 선택된 데이터 수정
   const db_put = async () => {
-    const form = document.querySelectorAll(".product_DB > .mb-1");
+    const form = document.querySelectorAll(".DB_data > .mb-1");
     const searchbar_value = document.querySelector("#DB_searchbar").value;
     const name = form[0].lastChild.value;
     const type = form[1].lastChild.value;
@@ -118,15 +120,20 @@ const Admin = () => {
     // 이름 중복 방지
     let overlap = false;
     for (let data of dataList) {
-      if (data.name === name) {
-        alert("이름이 중복됩니다");
-        overlap = true;
+      if (data._id != searchbar_value) {
+        // 수정전 이름과 다를경우
+        if (data.name === name) {
+          // 중복체크
+          alert("이름이 중복됩니다");
+          overlap = true;
+        }
       }
     }
+
     if (!overlap) {
       let success = false;
       await axios
-        .put(api.products_put + searchbar_value, {
+        .put(api.products_PUT + searchbar_value, {
           name,
           type,
           price,
@@ -147,6 +154,22 @@ const Admin = () => {
       if (!success) alert("ID와 값을 바르게 입력해 주세요");
     }
   };
+
+  // Category List 만들기
+  const category_form_list = [];
+  category_list.forEach((data) => {
+    category_form_list.push(<option value={data.name}>{data.name}</option>);
+  });
+
+  // NAV바 만들기
+  const nav_list = [];
+  admin_list.forEach((data) => {
+    nav_list.push(
+      <Nav.Item>
+        <Nav.Link href={data.href}>{data.name}</Nav.Link>
+      </Nav.Item>
+    );
+  });
 
   // 페이지 넘버 만들기
   const dataList_length = dataList?.length;
@@ -224,12 +247,7 @@ const Admin = () => {
     <>
       {/* 네비게이션 바 */}
       <Nav id="nav_bar" variant="tabs" defaultActiveKey="/admin/products">
-        <Nav.Item>
-          <Nav.Link href="/admin/products">Products</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="/admin/users">Users</Nav.Link>
-        </Nav.Item>
+        {nav_list}
       </Nav>
 
       {/* products 페이지 */}
